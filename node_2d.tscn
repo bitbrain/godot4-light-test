@@ -1,0 +1,80 @@
+[gd_scene load_steps=9 format=3 uid="uid://blc01rgt0hvbk"]
+
+[ext_resource type="Script" uid="uid://bxv11hxytl5tl" path="res://node_2d.gd" id="1_epypp"]
+[ext_resource type="Texture2D" uid="uid://cv4vpjrrpa8pp" path="res://light.png" id="1_wtcfe"]
+[ext_resource type="Texture2D" uid="uid://djmjymxk2jjk3" path="res://icon.svg" id="2_0e48y"]
+[ext_resource type="Shader" uid="uid://crp0a82l87jwm" path="res://MultiplyShader.gdshader" id="3_0hol4"]
+[ext_resource type="Shader" uid="uid://bn3755cn0jsd3" path="res://WallShader.gdshader" id="5_q6r6c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q6r6c"]
+shader = ExtResource("3_0hol4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kdubu"]
+shader = ExtResource("5_q6r6c")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_q6r6c"]
+cull_mode = 1
+polygon = PackedVector2Array(303, 205, 718, 206, 718, 226, 302, 230)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_epypp")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -157.0
+offset_top = -138.0
+offset_right = 1243.0
+offset_bottom = 706.0
+color = Color(0.098016, 0.107148, 0.094479, 1)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.129558, 0.129558, 0.129558, 1)
+
+[node name="Background" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_q6r6c")
+position = Vector2(565, 297.5)
+scale = Vector2(10.3125, 6.32031)
+texture = ExtResource("2_0e48y")
+
+[node name="YSort" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="PointLight2D" type="PointLight2D" parent="YSort"]
+position = Vector2(290, 246)
+energy = 5.0
+shadow_enabled = true
+shadow_filter = 2
+texture = ExtResource("1_wtcfe")
+texture_scale = 2.0
+
+[node name="Sprite2D" type="Sprite2D" parent="YSort"]
+material = SubResource("ShaderMaterial_kdubu")
+position = Vector2(510, 138)
+scale = Vector2(3.25, 1.45313)
+texture = ExtResource("2_0e48y")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="YSort/Sprite2D"]
+position = Vector2(-156.923, -94.9677)
+scale = Vector2(0.307692, 0.688172)
+occluder = SubResource("OccluderPolygon2D_q6r6c")
+
+[node name="Sprite2D2" type="Sprite2D" parent="YSort"]
+material = SubResource("ShaderMaterial_kdubu")
+position = Vector2(816, 410)
+scale = Vector2(3.25, 1.45313)
+texture = ExtResource("2_0e48y")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="YSort/Sprite2D2"]
+position = Vector2(-327.385, -82.5807)
+scale = Vector2(0.307692, 0.688172)
+occluder = SubResource("OccluderPolygon2D_q6r6c")
+
+[node name="Sprite2D3" type="Sprite2D" parent="YSort"]
+material = SubResource("ShaderMaterial_kdubu")
+position = Vector2(261, 422)
+scale = Vector2(3.25, 1.45313)
+texture = ExtResource("2_0e48y")
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="YSort/Sprite2D3"]
+position = Vector2(13.5385, -104.602)
+scale = Vector2(0.307692, 0.688172)
+occluder = SubResource("OccluderPolygon2D_q6r6c")
